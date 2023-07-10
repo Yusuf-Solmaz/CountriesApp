@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/country_nav"
+    app:startDestination="@id/countryList">
+
+    <fragment
+        android:id="@+id/countryList"
+        android:name="com.yusuf.mapapp.CountryList"
+        android:label="fragment_country_list"
+        tools:layout="@layout/fragment_country_list" />
+    <fragment
+        android:id="@+id/countryInfo"
+        android:name="com.yusuf.mapapp.CountryInfo"
+        android:label="fragment_country_info"
+        tools:layout="@layout/fragment_country_info" />
+</navigation>
