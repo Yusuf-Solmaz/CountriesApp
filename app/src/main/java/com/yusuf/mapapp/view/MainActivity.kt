@@ -1,7 +1,8 @@
-package com.yusuf.mapapp
+package com.yusuf.mapapp.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.yusuf.mapapp.R
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

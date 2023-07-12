@@ -7,12 +7,21 @@
 
     <fragment
         android:id="@+id/countryList"
-        android:name="com.yusuf.mapapp.CountryList"
+        android:name="com.yusuf.mapapp.view.CountryList"
         android:label="fragment_country_list"
-        tools:layout="@layout/fragment_country_list" />
+        tools:layout="@layout/fragment_country_list" >
+        <action
+            android:id="@+id/action_countryList_to_countryInfo"
+            app:destination="@id/countryInfo" />
+    </fragment>
     <fragment
         android:id="@+id/countryInfo"
-        android:name="com.yusuf.mapapp.CountryInfo"
+        android:name="com.yusuf.mapapp.view.CountryInfo"
         android:label="fragment_country_info"
-        tools:layout="@layout/fragment_country_info" />
+        tools:layout="@layout/fragment_country_info" >
+        <argument
+            android:name="countryId"
+            app:argType="integer"
+            android:defaultValue="0" />
+    </fragment>
 </navigation>
