@@ -11,6 +11,15 @@ class CountryListViewModel : ViewModel() {
     val countriesLoading  = MutableLiveData<Boolean>()
 
     fun refreshData(){
-        val country = CountryModel("Turkey","Ankara","Europe","TR","","Turkish")
+        val turkey = CountryModel("Turkey","Ankara","Europe","TR","","Turkish")
+        val italy = CountryModel("Italy","Rome","Europe","EUR","","Italian")
+        val usa = CountryModel("USA","Washington","America","USD","","English")
+        val spain = CountryModel("Spain","Madrid","Europe","EUR","","Spanish")
+
+        val countryList = arrayListOf<CountryModel>(turkey,italy,usa,spain)
+
+        countries.value = countryList
+        error.value = false
+        countriesLoading.value = false
     }
 }
