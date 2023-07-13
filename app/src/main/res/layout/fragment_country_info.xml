@@ -22,6 +22,7 @@
         tools:src="@tools:sample/backgrounds/scenic" />
 
     <TextView
+        android:textColor="@color/white"
         android:id="@+id/countryInfoName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -29,49 +30,57 @@
         android:text="TextView"
         android:textSize="20sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/textView3"
+        app:layout_constraintBottom_toTopOf="@+id/countryInfoCapital"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/countryInfoImage" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:textColor="@color/white"
+
+        android:id="@+id/countryInfoCapital"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="39dp"
         android:text="TextView"
-        app:layout_constraintBottom_toTopOf="@+id/textView4"
+        app:layout_constraintBottom_toTopOf="@+id/countryInfoRegion"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/countryInfoName" />
 
     <TextView
-        android:id="@+id/textView4"
+        android:textColor="@color/white"
+
+        android:id="@+id/countryInfoRegion"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="36dp"
         android:text="TextView"
-        app:layout_constraintBottom_toTopOf="@+id/textView5"
+        app:layout_constraintBottom_toTopOf="@+id/countryInfoCurrency"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+        app:layout_constraintTop_toBottomOf="@+id/countryInfoCapital" />
 
     <TextView
-        android:id="@+id/textView5"
+        android:textColor="@color/white"
+
+        android:id="@+id/countryInfoCurrency"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="38dp"
         android:text="TextView"
-        app:layout_constraintBottom_toTopOf="@+id/textView6"
+        app:layout_constraintBottom_toTopOf="@+id/countryInfoLanguage"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+        app:layout_constraintTop_toBottomOf="@+id/countryInfoRegion" />
 
     <TextView
-        android:id="@+id/textView6"
+        android:textColor="@color/white"
+
+        android:id="@+id/countryInfoLanguage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="165dp"
@@ -80,7 +89,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView5" />
+        app:layout_constraintTop_toBottomOf="@+id/countryInfoCurrency" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

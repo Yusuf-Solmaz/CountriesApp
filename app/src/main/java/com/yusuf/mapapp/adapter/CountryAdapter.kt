@@ -3,11 +3,13 @@ package com.yusuf.mapapp.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.yusuf.mapapp.R
 import com.yusuf.mapapp.databinding.CountryRecyclerRowBinding
 import com.yusuf.mapapp.model.CountryModel
 import com.yusuf.mapapp.view.CountryList
+import com.yusuf.mapapp.view.CountryListDirections
 
 class CountryAdapter(val countryList: ArrayList<CountryModel>) : RecyclerView.Adapter<CountryAdapter.CountryHolder>() {
 
@@ -28,6 +30,11 @@ class CountryAdapter(val countryList: ArrayList<CountryModel>) : RecyclerView.Ad
        holder.binding.countryName.text = countryList[position].countryName
         holder.binding.region.text = countryList[position].countryRegion
         //holder.binding.recyclerRowImage
+
+        holder.itemView.setOnClickListener {
+            val action = CountryListDirections.actionCountryListToCountryInfo()
+            Navigation.findNavController(it).navigate(action)
+        }
     }
 
     fun updateCountry(newCountryList:List<CountryModel>){
