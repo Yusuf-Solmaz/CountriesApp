@@ -9,4 +9,8 @@ class CountryListViewModel : ViewModel() {
     val countries  = MutableLiveData<List<CountryModel>>()
     val error  = MutableLiveData<Boolean>()
     val countriesLoading  = MutableLiveData<Boolean>()
+
+    fun refreshData(){
+        val country = CountryModel("Turkey","Ankara","Europe","TR","","Turkish")
+    }
 }
