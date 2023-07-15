@@ -8,6 +8,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.yusuf.mapapp.R
 import com.yusuf.mapapp.databinding.CountryRecyclerRowBinding
 import com.yusuf.mapapp.model.CountryModel
+import com.yusuf.mapapp.util.downloadFromUrl
+import com.yusuf.mapapp.util.placeHolder
 import com.yusuf.mapapp.view.CountryList
 import com.yusuf.mapapp.view.CountryListDirections
 
@@ -29,7 +31,9 @@ class CountryAdapter(val countryList: ArrayList<CountryModel>) : RecyclerView.Ad
     override fun onBindViewHolder(holder: CountryHolder, position: Int) {
        holder.binding.countryName.text = countryList[position].countryName
         holder.binding.region.text = countryList[position].countryRegion
-        //holder.binding.recyclerRowImage
+        holder.binding.recyclerRowImage.downloadFromUrl(countryList[position].countryFlag.toString(),
+            placeHolder(holder.itemView.context)
+        )
 
         holder.itemView.setOnClickListener {
             val action = CountryListDirections.actionCountryListToCountryInfo()
