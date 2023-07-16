@@ -23,4 +23,7 @@ interface CountryDAO {
 
     @Query("Delete from country where name= :name")
     suspend fun deleteCountryByName(name : String)
+
+    @Query("Delete from country")
+    suspend fun deleteAllCountries()
 }
