@@ -42,7 +42,7 @@ class CountryList : Fragment() {
             binding.recyclerView.visibility = View.GONE
             binding.textView.visibility= View.GONE
             binding.progressBar.visibility=View.VISIBLE
-            viewModel.refreshData()
+            viewModel.refreshFromAPI()
             binding.swipeRefreshLayout.isRefreshing = false
 
         }

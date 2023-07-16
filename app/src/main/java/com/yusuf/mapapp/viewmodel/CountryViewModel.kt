@@ -1,15 +1,21 @@
 package com.yusuf.mapapp.viewmodel
 
+import android.app.Application
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.yusuf.mapapp.model.CountryModel
+import com.yusuf.mapapp.service.CountryDatabase
+import kotlinx.coroutines.launch
 
-class CountryViewModel : ViewModel() {
+class CountryViewModel(application: Application ) : BaseViewModel(application) {
 
-    val countryModel = MutableLiveData<CountryModel>()
+    val countryLiveModel = MutableLiveData<CountryModel>()
 
-    fun getDataFromRoom(){
-        val turkey = CountryModel("Turkey","Ankara","Europe","TR","","Turkish")
-        countryModel.value = turkey
+    fun getDataFromRoom(id: Int){
+        launch {
+            val dao = CountryDatabase(getApplication()).countryDao()
+            val country = dao.getOneCountryById(id)
+            countryLiveModel.value = country
+        }
     }
 }

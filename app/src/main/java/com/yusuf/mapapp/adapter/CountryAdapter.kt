@@ -1,16 +1,13 @@
 package com.yusuf.mapapp.adapter
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
-import com.yusuf.mapapp.R
 import com.yusuf.mapapp.databinding.CountryRecyclerRowBinding
 import com.yusuf.mapapp.model.CountryModel
 import com.yusuf.mapapp.util.downloadFromUrl
 import com.yusuf.mapapp.util.placeHolder
-import com.yusuf.mapapp.view.CountryList
 import com.yusuf.mapapp.view.CountryListDirections
 
 class CountryAdapter(val countryList: ArrayList<CountryModel>) : RecyclerView.Adapter<CountryAdapter.CountryHolder>() {
@@ -36,7 +33,7 @@ class CountryAdapter(val countryList: ArrayList<CountryModel>) : RecyclerView.Ad
         )
 
         holder.itemView.setOnClickListener {
-            val action = CountryListDirections.actionCountryListToCountryInfo()
+            val action = CountryListDirections.actionCountryListToCountryInfo(countryList[position].id)
             Navigation.findNavController(it).navigate(action)
         }
     }

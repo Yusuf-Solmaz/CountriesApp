@@ -7,9 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.yusuf.mapapp.R
 import com.yusuf.mapapp.databinding.FragmentCountryInfoBinding
-import com.yusuf.mapapp.databinding.FragmentCountryListBinding
+import com.yusuf.mapapp.util.downloadFromUrl
+import com.yusuf.mapapp.util.placeHolder
 import com.yusuf.mapapp.viewmodel.CountryViewModel
 
 
@@ -17,7 +17,7 @@ class CountryInfo : Fragment() {
 
     private var _binding: FragmentCountryInfoBinding? = null
     private val binding get() = _binding!!
-    private  var countryId =0
+    private  var countryId = 0
 
     lateinit var countryViewModel : CountryViewModel
 
@@ -27,6 +27,7 @@ class CountryInfo : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
+
         _binding = FragmentCountryInfoBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -34,12 +35,14 @@ class CountryInfo : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        countryViewModel = ViewModelProvider(this)[CountryViewModel::class.java]
-        countryViewModel.getDataFromRoom()
-
         arguments?.let {
             countryId = CountryInfoArgs.fromBundle(it).countryId
         }
+
+        countryViewModel = ViewModelProvider(this)[CountryViewModel::class.java]
+        countryViewModel.getDataFromRoom(countryId)
+
+
 
         observeLiveData()
 
@@ -47,7 +50,7 @@ class CountryInfo : Fragment() {
 
 
     private fun observeLiveData(){
-            countryViewModel.countryModel.observe(viewLifecycleOwner, Observer {
+            countryViewModel.countryLiveModel.observe(viewLifecycleOwner, Observer {
                 country -> country?.let {
 
                 binding.countryInfoCapital.text = country.countryCapital
@@ -55,7 +58,10 @@ class CountryInfo : Fragment() {
                 binding.countryInfoName.text = country.countryName
                 binding.countryInfoLanguage.text = country.countryLanguage
                 binding.countryInfoRegion.text = country.countryRegion
+                context?.let {
+                    binding.countryInfoImage.downloadFromUrl(country.countryFlag, placeHolder(it))
 
+                }
             }
             })
     }

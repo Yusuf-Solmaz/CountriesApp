@@ -1,12 +1,14 @@
 package com.yusuf.mapapp.viewmodel
 
 import android.app.Application
+import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.yusuf.mapapp.model.CountryModel
 import com.yusuf.mapapp.service.CountryApiService
 import com.yusuf.mapapp.service.CountryDAO
 import com.yusuf.mapapp.service.CountryDatabase
+import com.yusuf.mapapp.util.CustomSharedPreferences
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.observers.DisposableSingleObserver
@@ -18,14 +20,36 @@ class CountryListViewModel(application: Application) : BaseViewModel(application
     val countries  = MutableLiveData<List<CountryModel>>()
     val error  = MutableLiveData<Boolean>()
     val countriesLoading  = MutableLiveData<Boolean>()
-    var service = CountryApiService()
+    private var service = CountryApiService()
     val disposable = CompositeDisposable()
+    private val customSharedPreferences= CustomSharedPreferences(getApplication())
+    private val refreshTime = 10*60*1000*1000*1000L
 
     fun refreshData(){
-       getDataFromApi()
+        val updateTime = customSharedPreferences.getTime()
+        if (updateTime !=null && updateTime != 0L && System.nanoTime() -updateTime < refreshTime){
+         getDataFromSQLite()
+        }
+        else{
+            getDataFromApi()
+        }
     }
 
-   fun getDataFromApi(){
+    fun refreshFromAPI(){
+        getDataFromApi()
+    }
+
+    private fun getDataFromSQLite() {
+        countriesLoading.value = true
+        launch {
+            val countries = CountryDatabase(getApplication()).countryDao().getAllCountries()
+            getCountries(countries)
+            Toast.makeText(getApplication(),"Data's From SQLite",Toast.LENGTH_LONG).show()
+
+        }
+    }
+
+    fun getDataFromApi(){
         countriesLoading.value = true
        disposable.add(service.getData()
            .subscribeOn(Schedulers.newThread())
@@ -33,6 +57,8 @@ class CountryListViewModel(application: Application) : BaseViewModel(application
            .subscribeWith(object : DisposableSingleObserver<List<CountryModel>>(){
                override fun onSuccess(t: List<CountryModel>) {
                     insertInSQLite(t)
+                   Toast.makeText(getApplication(),"Data's From API",Toast.LENGTH_LONG).show()
+
                }
 
                override fun onError(e: Throwable) {
@@ -62,6 +88,12 @@ class CountryListViewModel(application: Application) : BaseViewModel(application
                     }
                  getCountries(list)
                  }
+                customSharedPreferences.saveTime(System.nanoTime())
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+        disposable.clear()
     }
 
 }
