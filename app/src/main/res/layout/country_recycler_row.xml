@@ -1,43 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal">
 
-    <ImageView
-        android:layout_weight="1"
-        android:id="@+id/recyclerRowImage"
-        android:layout_width="0dp"
-        android:layout_height="91dp"
-        tools:srcCompat="@tools:sample/backgrounds/scenic" />
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="country"
+            type="com.yusuf.mapapp.model.CountryModel" />
+    </data>
+
     <LinearLayout
-        android:layout_weight="2"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
-        <TextView
-            android:textStyle="bold"
-            android:textColor="#009688"
-            android:textSize="20sp"
-            android:layout_marginTop="6dp"
-            android:layout_marginLeft="30dp"
-            android:id="@+id/countryName"
+        android:orientation="horizontal">
+
+
+        <ImageView
+            android:layout_weight="1"
+            android:id="@+id/recyclerRowImage"
+            android:layout_width="0dp"
+            android:layout_height="91dp"
+            tools:srcCompat="@tools:sample/backgrounds/scenic" />
+        <LinearLayout
+            android:layout_weight="2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="TextView" />
-        <TextView
-            android:textColor="#36068C"
-            android:textSize="20sp"
-            android:layout_marginTop="6dp"
-            android:layout_marginLeft="30dp"
-            android:id="@+id/region"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="TextView" />
+            android:orientation="vertical">
+            <TextView
+                android:textStyle="bold"
+                android:textColor="#009688"
+                android:textSize="20sp"
+                android:layout_marginTop="6dp"
+                android:layout_marginLeft="30dp"
+                android:id="@+id/countryName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{country.countryName}" />
+            <TextView
+                android:textColor="#36068C"
+                android:textSize="20sp"
+                android:layout_marginTop="6dp"
+                android:layout_marginLeft="30dp"
+                android:id="@+id/region"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{country.countryRegion}" />
+
+        </LinearLayout>
+
 
     </LinearLayout>
 
+</layout>
 
-</LinearLayout>

@@ -20,6 +20,7 @@ class CountryListViewModel(application: Application) : BaseViewModel(application
     val countries  = MutableLiveData<List<CountryModel>>()
     val error  = MutableLiveData<Boolean>()
     val countriesLoading  = MutableLiveData<Boolean>()
+
     private var service = CountryApiService()
     val disposable = CompositeDisposable()
     private val customSharedPreferences= CustomSharedPreferences(getApplication())
