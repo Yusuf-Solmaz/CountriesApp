@@ -8,20 +8,33 @@
         <variable
             name="country"
             type="com.yusuf.mapapp.model.CountryModel" />
+        <variable
+            name="listener"
+            type="com.yusuf.mapapp.adapter.CountryClickListener" />
     </data>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:onClick="@{listener::onCountryClicked}">
 
+
+        <TextView
+            android:id="@+id/countryId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:text="@{String.valueOf(country.id)}"
+            ></TextView>
 
         <ImageView
             android:layout_weight="1"
             android:id="@+id/recyclerRowImage"
             android:layout_width="0dp"
             android:layout_height="91dp"
-            tools:srcCompat="@tools:sample/backgrounds/scenic" />
+            tools:srcCompat="@tools:sample/backgrounds/scenic"
+            android:showImageOnDataBinding="@{country.countryFlag}"/>
         <LinearLayout
             android:layout_weight="2"
             android:layout_width="wrap_content"

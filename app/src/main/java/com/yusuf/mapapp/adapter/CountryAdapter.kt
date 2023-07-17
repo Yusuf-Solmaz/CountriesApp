@@ -1,9 +1,12 @@
 package com.yusuf.mapapp.adapter
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.Navigation
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.yusuf.mapapp.R
 import com.yusuf.mapapp.databinding.CountryRecyclerRowBinding
@@ -12,7 +15,7 @@ import com.yusuf.mapapp.util.downloadFromUrl
 import com.yusuf.mapapp.util.placeHolder
 import com.yusuf.mapapp.view.CountryListDirections
 
-class CountryAdapter(val countryList: ArrayList<CountryModel>) : RecyclerView.Adapter<CountryAdapter.CountryHolder>() {
+class CountryAdapter(val countryList: ArrayList<CountryModel>) : RecyclerView.Adapter<CountryAdapter.CountryHolder>(), CountryClickListener {
 
     class CountryHolder(val binding : CountryRecyclerRowBinding) : RecyclerView.ViewHolder(binding.root) {
 
@@ -32,7 +35,7 @@ class CountryAdapter(val countryList: ArrayList<CountryModel>) : RecyclerView.Ad
     override fun onBindViewHolder(holder: CountryHolder, position: Int) {
 
     holder.binding.country = countryList[position]
-
+    holder.binding.listener = this
 
     /*holder.binding.countryName.text = countryList[position].countryName
         holder.binding.region.text = countryList[position].countryRegion
@@ -46,9 +49,19 @@ class CountryAdapter(val countryList: ArrayList<CountryModel>) : RecyclerView.Ad
         }*/
     }
 
+
+
     fun updateCountry(newCountryList:List<CountryModel>){
         countryList.clear()
         countryList.addAll(newCountryList)
         notifyDataSetChanged()
+    }
+
+    override fun onCountryClicked(v: View) {
+
+        val id = v.findViewById<TextView>(R.id.countryId).text.toString().toInt()
+        val action = CountryListDirections.actionCountryListToCountryInfo(id)
+
+        Navigation.findNavController(v).navigate(action)
     }
 }

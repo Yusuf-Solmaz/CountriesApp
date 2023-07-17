@@ -22,6 +22,7 @@ class CountryList : Fragment() {
     private lateinit var viewModel : CountryListViewModel
     private val countryAdapter  = CountryAdapter(arrayListOf())
 
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

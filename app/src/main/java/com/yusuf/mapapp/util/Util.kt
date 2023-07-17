@@ -2,6 +2,7 @@ package com.yusuf.mapapp.util
 
 import android.content.Context
 import android.widget.ImageView
+import androidx.databinding.BindingAdapter
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
@@ -27,7 +28,13 @@ fun ImageView.downloadFromUrl(url: String?, progressDrawable: CircularProgressDr
         }
     }
 
+@BindingAdapter("android:showImageOnDataBinding") //XML'de metodun görünmeis için.
+fun showImageOnDAtaBinding(view: ImageView,url:String){
+    url?.let {
+        view.downloadFromUrl(url, placeHolder(view.context))
+    }
 
+}
 
 
 
